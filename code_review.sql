@@ -51,3 +51,13 @@ select avg(num_parts) avg_parts from sets where year > 2000;
 
 --Using GROUP BY, show the average number of parts for each theme_id in sets
 select theme_id, avg(num_parts) avg_parts from sets group by theme_id;
+
+
+
+
+--Join
+select *
+from part_categories as pc
+inner join parts as p
+on pc.id = p.part_cat_id
+where p.name like "%Werewolf%";
