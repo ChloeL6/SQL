@@ -1,5 +1,4 @@
 -- Selecting values
-
 --select only names include 'Hair' in part_num columns from parts and order by part_num in. 
 select * from parts where name like '%Hair%' order by part_num desc;
 
@@ -13,7 +12,6 @@ select p.id, p.name from part_categories as p where p.name like '%Bricks%';
 
 
 -- Subqueries
-
 -- Select all the ids from the themes table with 'Pirates' or 'Star Wars' in the name. 
 -- Then show the names of all the sets where the theme_id matches an id in that subquery.
 select name, theme_id from sets
@@ -31,9 +29,25 @@ where inventory_id in (select id from inventories
 
 
 --Manipulate values
-
 --concat '!!!' and upper case from sets
 select s.year, s.name, upper(concat(s.name, '!!!')) as new_name from sets s where s.name like '%Batman%';
 
 --if quantity > 1 in inventory_parts table, quantity *2, order by quantity
 select *, (quantity *2) as times_two from inventory_parts where quantity > 1 order by quantity limit 20;
+
+
+
+
+--Aggregation values
+--count total of transparent color in colors table
+select sum(is_trans) as total_trans from colors where is_trans =1;
+select count(name) as name_count from colors where name like "%Trans%";
+
+--show sum of all parts for all sets that came out since the 2000
+select sum(num_parts)sum_parts from sets where year >= 2000 ;
+
+--show avg num_parts for sets came out since 2000
+select avg(num_parts) avg_parts from sets where year > 2000;
+
+--Using GROUP BY, show the average number of parts for each theme_id in sets
+select theme_id, avg(num_parts) avg_parts from sets group by theme_id;
