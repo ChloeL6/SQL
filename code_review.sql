@@ -11,3 +11,20 @@ select p.id, p.name from part_categories as p where p.name like '%Bricks%';
 
 
 
+-- Subqueries
+
+-- Select all the ids from the themes table with 'Pirates' or 'Star Wars' in the name. 
+-- Then show the names of all the sets where the theme_id matches an id in that subquery.
+select name, theme_id from sets
+where theme_id in (select id from themes
+                	where name in ('Pirates', 'Star Wars'));
+                    
+-- Select the ids of the values in the inventories table that have more than one version (i.e. version > 1).
+-- Then select everything from the inventory_parts table where the inventory_id matches an id in that subquery. 
+-- Limit the output to 10 rows.
+select * from inventory_parts
+where inventory_id in (select id from inventories 
+  						        where version > 1) limit 10;
+
+
+
