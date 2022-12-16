@@ -11,6 +11,7 @@ select p.id, p.name from part_categories as p where p.name like '%Bricks%';
 
 
 
+
 -- Subqueries
 
 -- Select all the ids from the themes table with 'Pirates' or 'Star Wars' in the name. 
@@ -28,3 +29,11 @@ where inventory_id in (select id from inventories
 
 
 
+
+--Manipulate values
+
+--concat '!!!' and upper case from sets
+select s.year, s.name, upper(concat(s.name, '!!!')) as new_name from sets s where s.name like '%Batman%';
+
+--if quantity > 1 in inventory_parts table, quantity *2, order by quantity
+select *, (quantity *2) as times_two from inventory_parts where quantity > 1 order by quantity limit 20;
